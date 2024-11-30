@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddd7wup77761p"]
+
+[ext_resource type="Script" path="res://Scenes/testlevel.gd" id="1_dj10n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rldqg"]
+size = Vector2(18, 569)
+
+[node name="TestLevel" type="Node"]
+script = ExtResource("1_dj10n")
+
+[node name="Marker" type="Marker2D" parent="."]
+position = Vector2(0, 448)
+
+[node name="Player_Spawn" type="Marker2D" parent="."]
+position = Vector2(16, 384)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-9, 291.5)
+shape = SubResource("RectangleShape2D_rldqg")

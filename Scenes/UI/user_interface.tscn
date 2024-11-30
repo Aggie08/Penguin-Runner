@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://m6nmmx454axd"]
+
+[ext_resource type="Script" path="res://Scenes/UI/user_interface.gd" id="1_c5h4c"]
+[ext_resource type="PackedScene" uid="uid://h1ygdiil3a14" path="res://Scenes/UI/health_token.tscn" id="1_ra7gh"]
+[ext_resource type="Texture2D" uid="uid://xikxrqoghn0v" path="res://Sprites/UI/home_button.png" id="2_xrxta"]
+
+[node name="User_Interface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c5h4c")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 66.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(130, 66)
+layout_direction = 2
+layout_mode = 2
+
+[node name="Home" type="Button" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("2_xrxta")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="HealthToken" parent="MarginContainer/HBoxContainer/HBoxContainer" instance=ExtResource("1_ra7gh")]
+layout_mode = 2
+
+[node name="HealthToken2" parent="MarginContainer/HBoxContainer/HBoxContainer" instance=ExtResource("1_ra7gh")]
+layout_mode = 2
+
+[node name="Score" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Score: 0"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Home" to="." method="_on_home_pressed"]

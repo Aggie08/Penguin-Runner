@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://h1ygdiil3a14"]
+
+[ext_resource type="Texture2D" uid="uid://cdwicihpayfif" path="res://Sprites/UI/health_heart.png" id="1_gw3pt"]
+
+[node name="HealthToken" type="TextureRect"]
+texture = ExtResource("1_gw3pt")

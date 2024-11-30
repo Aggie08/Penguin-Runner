@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://csdnbam5jaq8v"]
+
+[ext_resource type="Texture2D" uid="uid://cvoc2xgxswyny" path="res://Sprites/Level/snow_floor.png" id="1_rujha"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fl3xo"]
+size = Vector2(32, 32)
+
+[node name="floor_block" type="Sprite2D"]
+texture = ExtResource("1_rujha")
+centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_fl3xo")
+one_way_collision = true

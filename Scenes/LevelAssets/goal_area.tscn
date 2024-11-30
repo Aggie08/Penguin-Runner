@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6yuugr7bfraf"]
+
+[ext_resource type="Script" path="res://Scenes/LevelAssets/goal_area.gd" id="1_k74m3"]
+[ext_resource type="PackedScene" uid="uid://bt570i8lqdc8y" path="res://Scenes/LevelAssets/floor_half_block.tscn" id="2_0uol3"]
+[ext_resource type="Texture2D" uid="uid://d4nwar8xygk6q" path="res://Sprites/Character/Paul.png" id="3_3anec"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3o2m2"]
+size = Vector2(128.5, 224)
+
+[node name="GoalArea" type="Node2D"]
+script = ExtResource("1_k74m3")
+
+[node name="Half_block" parent="." instance=ExtResource("2_0uol3")]
+
+[node name="Half_block2" parent="." instance=ExtResource("2_0uol3")]
+position = Vector2(32, 0)
+
+[node name="Half_block3" parent="." instance=ExtResource("2_0uol3")]
+position = Vector2(64, 0)
+
+[node name="Half_block4" parent="." instance=ExtResource("2_0uol3")]
+position = Vector2(96, 0)
+
+[node name="Paul" type="Sprite2D" parent="."]
+position = Vector2(16, 0)
+texture = ExtResource("3_3anec")
+hframes = 6
+
+[node name="Paul2" type="Sprite2D" parent="."]
+position = Vector2(104, 0)
+texture = ExtResource("3_3anec")
+flip_h = true
+hframes = 6
+
+[node name="Paul3" type="Sprite2D" parent="."]
+position = Vector2(120, 0)
+texture = ExtResource("3_3anec")
+flip_h = true
+hframes = 6
+
+[node name="Paul4" type="Sprite2D" parent="."]
+position = Vector2(64, 0)
+texture = ExtResource("3_3anec")
+flip_h = true
+hframes = 6
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(63.75, -80)
+shape = SubResource("RectangleShape2D_3o2m2")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

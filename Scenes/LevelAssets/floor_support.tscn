@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvamerenmfdas"]
+
+[ext_resource type="Texture2D" uid="uid://ctk8xa5xoag4f" path="res://Sprites/Level/snow_ground.png" id="1_nipf3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vaxie"]
+size = Vector2(32, 32)
+
+[node name="floor_support" type="Sprite2D"]
+texture = ExtResource("1_nipf3")
+centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_vaxie")

@@ -1,0 +1,192 @@
+[gd_scene load_steps=22 format=3 uid="uid://dm8j5i5ln76lk"]
+
+[ext_resource type="Script" path="res://Scenes/Characters/player.gd" id="1_b0emf"]
+[ext_resource type="Texture2D" uid="uid://d4nwar8xygk6q" path="res://Sprites/Character/Paul.png" id="2_s0n0f"]
+[ext_resource type="Texture2D" uid="uid://ddvip6wlvo7np" path="res://Sprites/UI/left_button.png" id="3_thmpy"]
+[ext_resource type="Texture2D" uid="uid://c1l1p204ry377" path="res://Sprites/UI/jump_button.png" id="4_qltul"]
+[ext_resource type="Texture2D" uid="uid://bnlg1bopmgtoq" path="res://Sprites/UI/left_button_pressed.png" id="4_tk612"]
+[ext_resource type="Texture2D" uid="uid://camksm7gkpvkk" path="res://Sprites/UI/right_button.png" id="5_3b2cr"]
+[ext_resource type="Texture2D" uid="uid://de7mnal41q0up" path="res://Sprites/UI/right_button_pressed.png" id="6_2yiyi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4eaix"]
+size = Vector2(18, 26)
+
+[sub_resource type="Animation" id="Animation_qb7oh"]
+resource_name = "Idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_rkkf8"]
+resource_name = "Jump"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_bcd6e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_qojl5"]
+resource_name = "Run"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 4, 3]
+}
+
+[sub_resource type="Animation" id="Animation_euq6g"]
+resource_name = "Slide"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_apvtl"]
+_data = {
+"Idle": SubResource("Animation_qb7oh"),
+"Jump": SubResource("Animation_rkkf8"),
+"RESET": SubResource("Animation_bcd6e"),
+"Run": SubResource("Animation_qojl5"),
+"Slide": SubResource("Animation_euq6g")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yjai8"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_okr5g"]
+animation = &"Jump"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_8ncfr"]
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_wbak6"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1ptax"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_knfng"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_b2sif"]
+graph_offset = Vector2(-8, -43)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_yjai8")
+nodes/Idle/position = Vector2(186.667, 133.333)
+"nodes/Jump 2/node" = SubResource("AnimationNodeAnimation_okr5g")
+"nodes/Jump 2/position" = Vector2(453.333, 213.333)
+nodes/JumpAction/node = SubResource("AnimationNodeOneShot_8ncfr")
+nodes/JumpAction/position = Vector2(613.333, 53.3333)
+nodes/Movement/node = SubResource("AnimationNodeBlend3_wbak6")
+nodes/Movement/position = Vector2(426.667, 0)
+nodes/Run/node = SubResource("AnimationNodeAnimation_knfng")
+nodes/Run/position = Vector2(186.667, 266.667)
+"nodes/Run 2/node" = SubResource("AnimationNodeAnimation_1ptax")
+"nodes/Run 2/position" = Vector2(186.667, 0)
+nodes/output/position = Vector2(800, 53.3333)
+node_connections = [&"JumpAction", 0, &"Movement", &"JumpAction", 1, &"Jump 2", &"Movement", 0, &"Run 2", &"Movement", 1, &"Idle", &"Movement", 2, &"Run", &"output", 0, &"JumpAction"]
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 31
+script = ExtResource("1_b0emf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("2_s0n0f")
+hframes = 6
+frame = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -13)
+shape = SubResource("RectangleShape2D_4eaix")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_apvtl")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_b2sif")
+anim_player = NodePath("../AnimationPlayer")
+parameters/JumpAction/active = false
+parameters/JumpAction/internal_active = false
+parameters/JumpAction/request = 0
+parameters/Movement/blend_amount = 0.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
+position_smoothing_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Left" type="TouchScreenButton" parent="CanvasLayer"]
+position = Vector2(48, 384)
+scale = Vector2(3, 3)
+texture_normal = ExtResource("3_thmpy")
+texture_pressed = ExtResource("4_tk612")
+passby_press = true
+action = "left"
+
+[node name="Right" type="TouchScreenButton" parent="CanvasLayer"]
+position = Vector2(176, 384)
+scale = Vector2(3, 3)
+texture_normal = ExtResource("5_3b2cr")
+texture_pressed = ExtResource("6_2yiyi")
+passby_press = true
+action = "right"
+
+[node name="Jump" type="TouchScreenButton" parent="CanvasLayer"]
+position = Vector2(728, 320)
+scale = Vector2(1.75, 1.75)
+texture_normal = ExtResource("4_qltul")
+action = "jump"

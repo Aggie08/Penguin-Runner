@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt570i8lqdc8y"]
+
+[ext_resource type="Texture2D" uid="uid://cwkk2buvglkde" path="res://Sprites/Level/snow_floor_half.png" id="1_rqj3m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yh654"]
+size = Vector2(32, 16)
+
+[node name="Half_block" type="Sprite2D"]
+texture = ExtResource("1_rqj3m")
+centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(16, 24)
+shape = SubResource("RectangleShape2D_yh654")
+one_way_collision = true

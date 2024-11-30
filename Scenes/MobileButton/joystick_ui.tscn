@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlk43d723e1w0"]
+
+[ext_resource type="Script" path="res://Scenes/MobileButton/joystick_ui.gd" id="1_jylcc"]
+[ext_resource type="Texture2D" uid="uid://du7ycjmumfy4l" path="res://Sprites/UI/mobile-ring.png" id="2_u1gn6"]
+[ext_resource type="Texture2D" uid="uid://crwocpx8cen2p" path="res://Sprites/UI/mobile-joystick-tip.png" id="3_u12v7"]
+
+[node name="JoystickUI" type="Control"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -175.0
+offset_right = 175.0
+grow_vertical = 0
+script = ExtResource("1_jylcc")
+visibility_mode = 1
+action_up = "jump"
+
+[node name="Border" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(75, 75)
+texture = ExtResource("2_u1gn6")
+
+[node name="Joystick" type="TextureRect" parent="Border"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -37.5
+offset_right = 37.5
+offset_bottom = 37.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(37.5, 37.5)
+texture = ExtResource("3_u12v7")
